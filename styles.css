@@ -1,8 +1,14 @@
 body {
   display: flex;
   flex-direction: column;
-  background-color: green;
+  background: rgb(0, 153, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 153, 0, 1) 0%,
+    rgba(0, 204, 0, 1) 100%
+  );
   justify-content: center;
+  background-attachment: fixed;
 }
 
 #header {
@@ -63,12 +69,19 @@ body {
   height: 89px;
   margin: 9px 9px 41px 9px;
   border-radius: 8px;
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cardsContainerCSS {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 12px;
+  width: 70%;
+  margin: auto;
+  border-radius: 3px;
 }
 
 .red {
@@ -80,14 +93,103 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  row-gap: 0px 50px;
 }
 
 .creditMessage {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .playerBtn {
   display: inline-block;
+  border: 2px solid gold;
+  background-color: maroon;
+  color: white;
+  border-radius: 8px;
+  font-size: 18px;
+  width: 120px;
+  height: 36px;
+  font-family: "Lato", sans-serif;
+  font-style: italic;
+  background: -moz-linear-gradient(top, #ff3019 0%, #cf0404 100%); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #e01238),
+    color-stop(100%, #8f011b)
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    top,
+    #e01238 0%,
+    #8f011b 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    top,
+    #e01238 0%,
+    #8f011b 100%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #e01238 0%, #8f011b 100%); /* IE10+ */
+  background: linear-gradient(top, #e01238 0%, #8f011b 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e01238', endColorstr='#8F011B',GradientType=0 ); /* IE6-9 */
+  -webkit-transition: all 0.3s linear;
+  -khtml-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+.payTableBtn {
+  display: inline-block;
+  border: 2px solid silver;
+  background-color: silver;
+  color: black;
+  border-radius: 8px;
+  font-size: 18px;
+  width: 120px;
+  height: 36px;
+  font-family: "Lato", sans-serif;
+  background: -moz-linear-gradient(
+    top,
+    rgb(202, 202, 202) 0%,
+    rgb(170, 170, 170) 100%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, rgb(202, 202, 202)),
+    color-stop(100%, rgb(170, 170, 170))
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    top,
+    rgb(202, 202, 202) 0%,
+    rgb(170, 170, 170) 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    top,
+    rgb(202, 202, 202) 0%,
+    rgb(170, 170, 170) 100%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(
+    top,
+    rgb(202, 202, 202) 0%,
+    rgb(170, 170, 170) 100%
+  ); /* IE10+ */
+  background: linear-gradient(
+    top,
+    rgb(202, 202, 202) 0%,
+    rgb(170, 170, 170) 100%
+  ); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(202, 202, 202)', endColorstr='rgb(170, 180, 170)',GradientType=0 ); /* IE6-9 */
+  -webkit-transition: all 0.3s linear;
+  -khtml-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 
 table {
@@ -114,11 +216,11 @@ td {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   margin: auto;
-  padding: 20px 20px 20px 38px;
+  padding: 20px 10px 20px 28px;
   left: 0;
   right: 0;
   top: 10%;
-  width: 80%; /* Full width */
+  width: 50%; /* Full width */
   height: auto; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: white;

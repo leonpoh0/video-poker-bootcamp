@@ -210,7 +210,7 @@ const createDeck = () => {
 };
 
 const holdCard = (i, holdIndicator) => {
-  if (playerBtn.innerText === "Draw") {
+  if (playerBtn.innerText === "DRAW") {
     if (holdCardsHand[i] === 0) {
       holdCardsHand[i] = 1;
       holdIndicator.innerText = "Hold";
@@ -222,15 +222,15 @@ const holdCard = (i, holdIndicator) => {
 };
 
 const drawCards = () => {
-  if (playerBtn.innerText === "Deal") {
+  if (playerBtn.innerText === "DEAL") {
     for (let i = 0; i < 5; i += 1) {
       let cardDrawn = deck.pop();
       playerHand.push(cardDrawn);
     }
-    playerBtn.innerText = "Draw";
+    playerBtn.innerText = "DRAW";
     matchPattern.innerText = "Select which cards to hold then press the button";
     createCards();
-  } else if (playerBtn.innerText === "Draw") {
+  } else if (playerBtn.innerText === "DRAW") {
     for (let i = 0; i < 5; i += 1) {
       if (holdCardsHand[i] === 0) {
         let cardDrawn = deck.pop();
@@ -242,7 +242,7 @@ const drawCards = () => {
     }
     let score = calcHandScore();
     credits += score;
-    creditMessage.innerText = "Your current credit: " + credits;
+    creditMessage.innerText = "CREDITS: " + credits;
     if (winCondition() === "Nothing") {
       matchPattern.innerText = "You lost this round.";
     } else {
@@ -257,10 +257,10 @@ const drawCards = () => {
       }
       milliseconds += 1000;
     }, delayInMilliseconds);
-    playerBtn.innerText = "Try again";
-  } else if (playerBtn.innerText === "Try again") {
+    playerBtn.innerText = "TRY AGAIN";
+  } else if (playerBtn.innerText === "TRY AGAIN") {
     console.log("test");
-    playerBtn.innerText = "Deal";
+    playerBtn.innerText = "DEAL";
     initGame();
   }
 };
@@ -350,13 +350,13 @@ let cardsContainer = document.createElement("div");
 cardsContainer.classList = "cardsContainerCSS";
 document.body.appendChild(cardsContainer);
 
+let creditMessage = document.createElement("div");
+creditMessage.classList = "creditMessage";
+document.body.appendChild(creditMessage);
+
 let bottomSection = document.createElement("div");
 bottomSection.classList = "bottomSection";
 document.body.appendChild(bottomSection);
-
-let creditMessage = document.createElement("div");
-creditMessage.classList = "creditMessage";
-bottomSection.appendChild(creditMessage);
 
 const playerBtn = document.createElement("button");
 playerBtn.addEventListener("click", drawCards);
@@ -366,14 +366,14 @@ bottomSection.appendChild(playerBtn);
 const payTableBtn = document.createElement("button");
 payTableBtn.addEventListener("click", popModal);
 payTableBtn.classList = "payTableBtn";
-payTableBtn.innerText = "Pay Table";
+payTableBtn.innerText = "PAY TABLE";
 bottomSection.appendChild(payTableBtn);
 
 function initGame() {
   cardsContainer.innerHTML = "";
-  creditMessage.innerText = "Your current credit: " + credits;
+  creditMessage.innerText = "CREDITS: " + credits;
   matchPattern.innerText = "Press the button below to start.";
-  playerBtn.innerText = "Deal";
+  playerBtn.innerText = "DEAL";
   deck = shuffleCards(createDeck());
   playerHand = [];
 
