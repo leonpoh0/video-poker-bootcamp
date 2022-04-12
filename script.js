@@ -8,7 +8,7 @@ const delayInMilliseconds = 1000;
 
 const getRandomIndex = (max) => Math.floor(Math.random() * max);
 
-let matchPattern = document.createElement("div");
+let matchPattern = document.createElement("p");
 matchPattern.classList = "gameStatusMessage";
 document.body.appendChild(matchPattern);
 
@@ -228,7 +228,7 @@ const drawCards = () => {
       playerHand.push(cardDrawn);
     }
     playerBtn.innerText = "DRAW";
-    matchPattern.innerText = "Select which cards to hold then press the button";
+    matchPattern.innerText = "Select cards to hold and then draw cards.";
     createCards();
   } else if (playerBtn.innerText === "DRAW") {
     for (let i = 0; i < 5; i += 1) {
@@ -251,7 +251,9 @@ const drawCards = () => {
     console.log(credits);
     const ref = setInterval(() => {
       if (milliseconds >= 3000) {
-        matchPattern.innerText = "To start new game, press the button again.";
+        if (playerBtn.innerText === "TRY AGAIN") {
+          matchPattern.innerText = "Better luck next time. Try again.";
+        }
         console.log(milliseconds);
         clearInterval(ref);
       }
@@ -372,7 +374,7 @@ bottomSection.appendChild(payTableBtn);
 function initGame() {
   cardsContainer.innerHTML = "";
   creditMessage.innerText = "CREDITS: " + credits;
-  matchPattern.innerText = "Press the button below to start.";
+  matchPattern.innerText = "Press deal to start.";
   playerBtn.innerText = "DEAL";
   deck = shuffleCards(createDeck());
   playerHand = [];
