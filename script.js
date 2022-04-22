@@ -137,6 +137,11 @@ function getCard(i) {
   return document.getElementById(cardId);
 }
 
+for (let i = 0; i < 5; i += 1) {
+  let cardAtPosition = getCard(i);
+  cardAtPosition.addEventListener("click", () => holdCard(i));
+}
+
 function getCardHoldIndicator(i) {
   let holdId = "hold" + String(i);
   return document.getElementById(holdId);
@@ -212,20 +217,27 @@ const createDeck = () => {
 
 const holdCard = (i) => {
   let cardHoldIndicator = getCardHoldIndicator(i);
-  if (actionBtn.innerText === "DRAW") {
-    if (holdCardsHand[i] === 0) {
-      holdCardsHand[i] = 1;
-      cardHoldIndicator.innerText = "Hold";
-      cardHoldIndicator.classList.add("holdIndicatorBackground");
-    } else {
-      holdCardsHand[i] = 0;
-      cardHoldIndicator.innerText = "";
-      cardHoldIndicator.classList = "holdIndicator";
+  let cardAtPosition = getCard(i);
+  if (cardAtPosition.classList.contains("filledCard")) {
+    if (actionBtn.innerText === "DRAW") {
+      let audio = new Audio("Select.mov");
+      audio.play();
+      if (holdCardsHand[i] === 0) {
+        holdCardsHand[i] = 1;
+        cardHoldIndicator.innerHTML = "";
+        cardHoldIndicator.innerText = "Hold";
+        cardHoldIndicator.classList = "holdIndicatorBackground";
+      } else {
+        holdCardsHand[i] = 0;
+        cardHoldIndicator.innerText = "";
+        cardHoldIndicator.classList = "holdIndicator";
+      }
     }
   }
 };
 
 const drawCards = () => {
+  console.log(holdCardsHand);
   if (actionBtn.innerText === "DEAL") {
     for (let i = 0; i < 5; i += 1) {
       let cardDrawn = deck.pop();
@@ -250,10 +262,25 @@ const drawCards = () => {
     if (winCondition() === "Nothing") {
       gameStatusMessage.innerText = "You lost this round.";
     } else {
-      gameStatusMessage.innerText = winCondition();
+      if (score > 1) {
+        gameStatusMessage.innerText =
+          "Congrats! You got a " +
+          winCondition() +
+          " and won " +
+          score +
+          " credits.";
+      } else {
+        gameStatusMessage.innerText =
+          "Congrats! You got a " +
+          winCondition() +
+          " and won " +
+          score +
+          " credit.";
+      }
     }
+    milliseconds = 0;
     const ref = setInterval(() => {
-      if (milliseconds >= 3000) {
+      if (milliseconds >= 4000) {
         if (actionBtn.innerText === "TRY AGAIN") {
           if (gameStatusMessage.innerText === "You lost this round.") {
             gameStatusMessage.innerText = "Better luck next time. Try again.";
@@ -267,7 +294,6 @@ const drawCards = () => {
     }, delayInMilliseconds);
     actionBtn.innerText = "TRY AGAIN";
   } else if (actionBtn.innerText === "TRY AGAIN") {
-    actionBtn.innerText = "DEAL";
     initGame();
   }
 };
@@ -286,7 +312,6 @@ const createCards = (i) => {
   name.innerText = playerHand[i].displayName;
 
   cardAtPosition.append(suit, name);
-  cardAtPosition.addEventListener("click", () => holdCard(i));
 };
 
 let payTableModal = document.getElementById("modal-body");
@@ -324,9 +349,11 @@ function initGame() {
     let cardAtPosition = getCard(i);
     cardAtPosition.classList = "emptyCard";
     cardAtPosition.innerHTML = "";
+
     let cardHoldIndicator = getCardHoldIndicator(i);
+    cardHoldIndicator.innerHTML = "";
     cardHoldIndicator.classList = "holdIndicator";
-    cardHoldIndicator.innerText = "";
+    holdCardsHand[i] = 0;
   }
   creditMessage.innerText = "CREDITS: " + credits;
   gameStatusMessage.innerHTML = "Press deal to start.";
